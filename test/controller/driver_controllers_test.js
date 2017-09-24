@@ -42,13 +42,62 @@ describe('Drivers Controller',()=>{
                         .then((_driver)=>{
                           assert(_driver.driving === true);
                           done();
+                        
                         })
                 })
 
-                  })
-
+          })
 
   })
 
+  it('Delete to /api/drivers/id delete a driver',(done)=>{
 
-})
+       const driver = new Driver({'email':'john@gmail.com'});
+
+             driver.save()
+                   .then(()=>{
+                    
+                    request(app)//server has been created.
+                        .delete('/api/drivers/'+driver._id)
+                        .end(()=>{
+                            Driver.findOne({_id:driver._id})
+                                  .then((driver)=>{
+                                    assert (driver === null)
+                                    done();
+                                  })
+                                  
+                        })
+
+                 })
+
+          })
+
+ it('Get to /api/drivers find drivers in a location',(done)=>{
+
+       const seattleDriver = new Driver({
+                 'email':'john@gmail.com',
+                 'geometry':{'type':'Point','coordinates':[-122.4759902,47.6147628]}
+               });
+       
+       const miamiDriver = new Driver({
+                 'email':'phonny@gmail.com',
+                 'geometry':{'type':'Point','coordinates':[-80.253,25.791581]}
+               });
+
+               Promise.all([seattleDriver.save(),miamiDriver.save()])
+                      .then(()=>{
+
+                        request(app)
+                          .get('/api/drivers?lng=-80&lat=25')
+                          .end((err,res)=>{
+                            console.log('###',seattleDriver,miamiDriver);
+                            console.log(res.body);
+                              done()
+                          })
+
+                      })
+
+          })
+
+
+  })
