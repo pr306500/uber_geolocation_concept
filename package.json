@@ -1,0 +1,21 @@
+{
+  "name": "uber_concept",
+  "version": "1.0.0",
+  "description": "",
+  "main": "app.js",
+  "directories": {
+    "test": "test"
+  },
+  "scripts": {
+    "test": "NODE_ENV=test nodemon --exec 'mocha --recursive -R min'"
+  },
+  "author": "Pranjal Sharma <pranjal.sharma306500@gmail.com>",
+  "license": "ISC",
+  "dependencies": {
+    "body-parser": "^1.18.2",
+    "express": "^4.15.4",
+    "mocha": "^3.5.3",
+    "mongoose": "^4.11.12",
+    "supertest": "^3.0.0"
+  }
+}
