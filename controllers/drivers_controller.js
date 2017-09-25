@@ -7,7 +7,7 @@ module.exports = {
      
      Driver.geoNear(
                      {type:'Point',coordinates:[parseFloat(lng),parseFloat(lat)]},
-                     {spherical:true, maxDistance:20000}
+                     {spherical:true, maxDistance:200000}
                    )
                     .then(drivers=>res.send(drivers))
                     .catch(next);
