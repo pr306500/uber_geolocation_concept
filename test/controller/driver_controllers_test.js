@@ -27,13 +27,13 @@ describe('Drivers Controller',()=>{
   });
 
   it('PUT to /api/drivers/id exits an existing driver',(done)=>{
-
+      /* Manually we are adding driver to the database */
       const driver = new Driver({'email':'john@gmail.com','driving':false})
 
             driver.save()
                   .then(()=>{
-
-              request(app)
+      /*After manually saving it, we try to update it*/
+              request(app) // here we are hitting to the mock server
                 .put(`/api/drivers/${driver._id}`)
                 .send({'driving':true})
                 .end(()=>{
@@ -57,7 +57,7 @@ describe('Drivers Controller',()=>{
              driver.save()
                    .then(()=>{
                     
-                    request(app)//server has been created.
+                    request(app)//mock server has been created.
                         .delete('/api/drivers/'+driver._id)
                         .end(()=>{
                             Driver.findOne({_id:driver._id})
@@ -73,7 +73,7 @@ describe('Drivers Controller',()=>{
           })
 
  it('Get to /api/drivers find drivers in a location',(done)=>{
-
+    /* While performing unit test cases we need to enter data manually one*/
        const seattleDriver = new Driver({
                  'email':'john@gmail.com',
                  'geometry':{'type':'Point','coordinates':[-122.4759902,47.6147628]}
@@ -90,12 +90,11 @@ describe('Drivers Controller',()=>{
                         request(app)
                           .get('/api/drivers?lng=-80&lat=25')
                           .end((err,res)=>{
-                            console.log('###',seattleDriver,miamiDriver);
-                            console.log(res.body);
+                            
                               done()
                           })
 
-                      })
+                 })
 
           })
 

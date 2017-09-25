@@ -7,7 +7,7 @@ module.exports = {
      
      Driver.geoNear(
                      {type:'Point',coordinates:[parseFloat(lng),parseFloat(lat)]},
-                     {spherical:true, maxDistance:200000}
+                     {spherical:true, maxDistance:200000}//to find drive rupto the range of 200 km radius.
                    )
                     .then(drivers=>res.send(drivers))
                     .catch(next);
