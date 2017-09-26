@@ -41,8 +41,7 @@ describe('Drivers Controller',()=>{
                   Driver.findOne(driver._id)
                         .then((_driver)=>{
                           assert(_driver.driving === true);
-                          done();
-                        
+                          done();                        
                         })
                 })
 
@@ -73,7 +72,9 @@ describe('Drivers Controller',()=>{
           })
 
  it('Get to /api/drivers find drivers in a location',(done)=>{
-    /* While performing unit test cases we need to enter data manually one*/
+    /* While performing unit test cases we need to enter data manually one
+       We created two drivers with their geopositions.
+    */
        const seattleDriver = new Driver({
                  'email':'john@gmail.com',
                  'geometry':{'type':'Point','coordinates':[-122.4759902,47.6147628]}

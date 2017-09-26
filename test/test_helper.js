@@ -15,10 +15,11 @@ before((done)=>{
 
 
 beforeEach((done)=>{
-       /*When we drop the collection it drops the indexes as well*/
+       /*When we drop the collection it drops the indexes as well
+         as a result we were getting the error also */
        const  {drivers}  = mongoose.connection.collections;
             drivers.drop()
-                .then(()=>drivers.ensureIndex({'geometry.coordinates':'2dsphere'}))
+                .then(()=>drivers.createIndex({'geometry.coordinates':'2dsphere'}))
                 .then(()=> done())
                 .catch(()=>done());
 

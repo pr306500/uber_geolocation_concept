@@ -9,7 +9,7 @@ const PointSchema = new Schema({
     },
     'coordinates':{
     	type:[Number],//(x,y)
-    	index:'2dsphere'
+    	index:'2dsphere'// We are creating indexing through schema.
     }
 
 })
